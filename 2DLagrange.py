@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 
 def trajectory_general(x, xdot, fdot, fdotdot): # valid for any f(x), but needs f'(x) and f''(x)
