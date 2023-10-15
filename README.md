@@ -1,12 +1,12 @@
 # Simple Lagrange Trajectory
 Provides coordinates for a particle moving along a function curve (2D or 3D) using simple Lagrangian Mechanics.\
-The principle of Lagrangian Mechanics is least action, which makes it incredibly easy to find a differential equation which describes accurately our system.\
-The coordinates can be used very easily in [Desmos Graph](https://www.desmos.com/calculator).
+The principle of Lagrangian Mechanics is least action, which makes it incredibly easy to find a differential equation which accurately describes our system.\
+The coordinates can be used very easily in the [2D Desmos Graphing Calculator](https://www.desmos.com/calculator) and the [3D Desmos Graphing Calculator](https://www.desmos.com/3d).
 
 # 2D Version
 The 2D version is a special case of the 3D one, so it is much easier to compute.
 ## Building the 2D Lagrangian
-Let $f$ be a continuous differentiable function on our desired interval.\
+Let $f$ be a continuous differentiable (not actually needed) function on our desired interval.\
 Let $A$ be the point representing our particle, of coordinates $(x, y)$. We have therefore $A = (x, f(x))$\
 Let us now construct the Lagrangian of our system.\
 We have the potential energy: $E_p = mgy = mgf(x)$.\
@@ -48,8 +48,9 @@ We can simply write $\dot{U}_i$ as:
 giving us the recurrence relation that follows:
 $$U_{i+1} = dt \cdot \dot{U}_i + U_i$$
 
-Using the initial conditions $x_0$ and $\dot{x}_0$, we now have all values for $x$ and $\dot{x}$
-
+Using the initial conditions $x_0$ and $\dot{x}_0$, we now have all values for $x$ and $\dot{x}$\
+Here is an example:\
+![sin_friction](https://github.com/Arurikku/SimpleLagrangeTrajectory/assets/61802068/aba9533d-2eba-4170-a24e-5455f8588def)
 
 # 3D Version
 While jumping to a whole new dimension seems difficult, one only needs to know basic partial derivatives to do this.\
@@ -106,4 +107,14 @@ We again write $\dot{U}_i$ as:
 giving the same recurrence relation as before:
 $$U_{i+1} = dt \cdot \dot{U}_i + U_i$$
 
-Using the initial conditions $x_0$, $\dot{x}_0$, $y_0$, $\dot{y}_0$, we will again all values for $x$, $\dot{x}$, $y$, $\dot{y}$
+Using the initial conditions $x_0$, $\dot{x}_0$, $y_0$, $\dot{y}_0$, we will again have all values for $x$, $\dot{x}$, $y$, $\dot{y}$\
+Here is an example:\
+![3D_half_pipe_friction](https://github.com/Arurikku/SimpleLagrangeTrajectory/assets/61802068/5c4db07f-bb28-439a-b6c3-65cd0a2e7f0f)
+
+# Usage with Desmos
+After entering all the necesseray information in the python script, the console will print a list of the coordinates taken by the point.\
+You can check out [this Desmos example](https://www.desmos.com/calculator/jnyqaxwpyq) for how to graph the 2D version.\
+And [this example](https://www.desmos.com/3d/b1bd241470) for how to graph the 3D version.
+
+You can edit the script to print out the values for the absolute speed of the particle, and using some simple colours you can graph some nice visuals like this:\
+![colourHSV_test](https://github.com/Arurikku/SimpleLagrangeTrajectory/assets/61802068/a6d67ed6-e172-46cc-b659-335fa6299bf9)
