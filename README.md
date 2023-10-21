@@ -1,5 +1,5 @@
 # Simple Lagrange Trajectory
-Provides coordinates for a particle moving along a function curve (2D or 3D) using simple Lagrangian Mechanics.\
+Provides coordinates for a particle moving along a function curve (2D, 3D or even N dimension) using simple Lagrangian Mechanics.\
 The principle of Lagrangian Mechanics is least action, which makes it incredibly easy to find a differential equation which accurately describes our system.\
 The coordinates can be used very easily in the [2D Desmos Graphing Calculator](https://www.desmos.com/calculator) and the [3D Desmos Graphing Calculator](https://www.desmos.com/3d).
 
@@ -118,3 +118,33 @@ And [this example](https://www.desmos.com/3d/b1bd241470) for how to graph the 3D
 
 You can edit the script to print out the values for the absolute speed of the particle, and using some simple colours you can graph some nice visuals like this:\
 ![colourHSV_test](https://github.com/Arurikku/SimpleLagrangeTrajectory/assets/61802068/fc06d799-58fc-49bd-b124-74c89cd7e40a)
+
+
+# N Dimensions Version
+As per usual in science, let's generalise even if what we're describing makes no sense physically.\
+After 2D comes 3D, and after that comes the absurdity of N dimensions.\
+## Notation:
+We place ourselves in an N dimension cartesian coordinate system, meaning our point $A$ is now $A = (a_0, a_1, a_2, ..., a_{n+1})$ with $a_{n+1}$ the "height" of our point.\
+/!\ Note that this means our system is actually in (n+1) dimensions, as $a_{n+1} = f(a_0, a_1, a_2, ..., a_n)$.\
+We write $\overrightarrow{r} = (a_0, a_1, a_2, ..., a_n)$ so that we can write compactly:\
+$$f(a_0, a_1, a_2, ..., a_n) = f(\overrightarrow{r})$$\
+We also write the graident of $f$ as $\nabla f$ where:
+```math
+\nabla f=\begin{bmatrix} \frac{\partial f}{\partial a_0} \\ \frac{\partial f}{\partial a_1} \ \ \\ \vdots \\ \frac{\partial f}{\partial a_n} \end{bmatrix}
+```
+## Reminder:
+We need to keep in mind the following result:\
+$$\frac{d}{dt}f = \nabla f \cdot \overrightarrow{\dot{r}} = \sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}$$
+
+## Building the Lagrangian
+We have the potential energy: $E_p = mgf(\overrightarrow{r})$.\
+And the kinetic energy: $E_k = \frac{1}{2}\cdot mv^2$.\
+Since we are still in cartesian coordinates, we have:
+$$v^2 = \dot{a_0}^2 + \dot{a_1}^2 + \ldots + \dot{a_{n+1}}^2)$$
+$$\iff v^2 = \dot{a_0}^2 + \dot{a_1}^2 + \ldots + \dot{a_{n}}^2 + \bigl(\frac{d}{dt} f(\overrightarrow{r})\bigr)^2$$
+$$\iff v^2 = \sum_{k=0}^{n} \dot{a_{k}}^2 + \Bigl(\sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}\Bigr)^2$$
+Hence,
+$$L = \frac{1}{2} m \Bigl(\sum_{k=0}^{n} \dot{a_{k}}^2 + \Bigl(\sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}\Bigr)^2\Bigr) - mgf(\overrightarrow{r})$$
+In the end, we know that we will need to derive with respect to each coordinate to be able to get our final result, so let's just do the general case.\
+Let $w \in ⟦0, n ⟧$ 
+$$\frac{\partial L}{partial \dot{a_w}}$$
