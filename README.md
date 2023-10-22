@@ -122,7 +122,7 @@ You can edit the script to print out the values for the absolute speed of the pa
 
 # N Dimensions Version
 As per usual in science, let's generalise even if what we're describing makes no sense physically.\
-After 2D comes 3D, and after that comes the absurdity of N dimensions.\
+After 2D comes 3D, and after that comes the absurdity of N dimensions.
 ## Notation:
 We place ourselves in an N dimension cartesian coordinate system, meaning our point $A$ is now $A = (a_0, a_1, a_2, \ldots, a_{n+1})$ with $a_{n+1}$ the "height" of our point.\
 /!\ Note that this means our system is actually in (n+1) dimensions, as $a_{n+1} = f(a_0, a_1, a_2, \ldots, a_n)$.\
