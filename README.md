@@ -124,10 +124,10 @@ You can edit the script to print out the values for the absolute speed of the pa
 As per usual in science, let's generalise even if what we're describing makes no sense physically.\
 After 2D comes 3D, and after that comes the absurdity of N dimensions.\
 ## Notation:
-We place ourselves in an N dimension cartesian coordinate system, meaning our point $A$ is now $A = (a_0, a_1, a_2, ..., a_{n+1})$ with $a_{n+1}$ the "height" of our point.\
-/!\ Note that this means our system is actually in (n+1) dimensions, as $a_{n+1} = f(a_0, a_1, a_2, ..., a_n)$.\
-We write $\overrightarrow{r} = (a_0, a_1, a_2, ..., a_n)$ so that we can write compactly:\
-$$f(a_0, a_1, a_2, ..., a_n) = f(\overrightarrow{r})$$\
+We place ourselves in an N dimension cartesian coordinate system, meaning our point $A$ is now $A = (a_0, a_1, a_2, \ldots, a_{n+1})$ with $a_{n+1}$ the "height" of our point.\
+/!\ Note that this means our system is actually in (n+1) dimensions, as $a_{n+1} = f(a_0, a_1, a_2, \ldots, a_n)$.\
+We write $\overrightarrow{r} = (a_0, a_1, a_2, \ldots, a_n)$ so that we can write compactly:\
+$$f(a_0, a_1, a_2, \ldots, a_n) = f(\overrightarrow{r})$$\
 We also write the graident of $f$ as $\nabla f$ where:
 ```math
 \nabla f=\begin{bmatrix} \frac{\partial f}{\partial a_0} \\ \frac{\partial f}{\partial a_1} \ \ \\ \vdots \\ \frac{\partial f}{\partial a_n} \end{bmatrix}
@@ -145,6 +145,49 @@ $$\iff v^2 = \dot{a_0}^2 + \dot{a_1}^2 + \ldots + \dot{a_{n}}^2 + \bigl(\frac{d}
 $$\iff v^2 = \sum_{k=0}^{n} \dot{a_{k}}^2 + \Bigl(\sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}\Bigr)^2$$
 Hence,
 $$L = \frac{1}{2} m \Bigl(\sum_{k=0}^{n} \dot{a_{k}}^2 + \Bigl(\sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}\Bigr)^2\Bigr) - mgf(\overrightarrow{r})$$
+## Using the principle of least action
 In the end, we know that we will need to derive with respect to each coordinate to be able to get our final result, so let's just do the general case.\
 Let $w \in ⟦0, n ⟧$ 
-$$\frac{\partial L}{partial \dot{a_w}}$$
+$$\frac{\partial L}{\partial \dot{a_w}} = m\Bigl(\dot{a_w} + \frac{\partial f}{\partial a_w}\sum_{k=0}^{n} \dot{a_k} \frac{\partial f}{\partial a_k}\Bigr)$$
+$$\frac{d}{dt}\Bigl(\frac{\partial L}{\partial \dot{a_w}}\Bigr) = m\Bigl(\ddot{a_w}+\sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial f}{\partial a_j}\frac{\partial^2 f}{\partial a_w \partial a_k} + \frac{\partial f}{\partial a_w}\sum_{k=0}^n\ddot{a_k}\frac{\partial f}{\partial a_k}+\frac{\partial f}{\partial a_w}\sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial^2 f}{\partial a_k \partial a_j}\Bigr)$$
+$$\frac{\partial L}{\partial a_w} = m\Bigl(\dot{a_w}\frac{\partial^2 f}{\partial a_w^2}\sum_{k=0}^n\ddot{a_k}\frac{\partial f}{\partial a_k} - g\frac{\partial f}{\partial a_w}\Bigr)$$
+We apply the principle of least action, giving us:\
+$$\ddot{a_w}+\sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial f}{\partial a_j}\frac{\partial^2 f}{\partial a_w \partial a_k} + \frac{\partial f}{\partial a_w}\sum_{k=0}^n\ddot{a_k}\frac{\partial f}{\partial a_k}+\frac{\partial f}{\partial a_w}\sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial^2 f}{\partial a_k \partial a_j} = \dot{a_w}\frac{\partial^2 f}{\partial a_w^2}\sum_{k=0}^n\ddot{a_k}\frac{\partial f}{\partial a_k} - g\frac{\partial f}{\partial a_w}$$
+To simplify the writing, we'll package every term that doesn't depend on a second order time derivative into one big constant $C_w$:\
+$$C_w = \dot{a_w}\frac{\partial^2 f}{\partial a_w^2}\sum_{k=0}^n\ddot{a_k}\frac{\partial f}{\partial a_k} - g\frac{\partial f}{\partial a_w} - \sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial f}{\partial a_j}\frac{\partial^2 f}{\partial a_w \partial a_k} - \frac{\partial f}{\partial a_w}\sum_{k=0}^n\sum_{j=0}^n\dot{a_k}\dot{a_j}\frac{\partial^2 f}{\partial a_k \partial a_j}$$
+We need to rewrite this with all of the $\ddot{a_w}$ terms together to rewrite this as a nice system of equations, which gives us:\
+$$\ddot{a_w}\Bigl(1+\Bigl(\frac{\partial f}{\partial a_w}\Bigr)^2\Bigr) + \frac{\partial f}{\partial a_w}\sum_{{k=0} \atop{k \neq w}}^n\ddot{a_k}\frac{\partial f}{\partial a_k} = C_w$$
+We now package more terms into constants:\
+$$\lambda_w = \Bigl(1+\Bigl(\frac{\partial f}{\partial a_w}\Bigr)^2\Bigr) \ , \ H_k = \ddot{a_k}\frac{\partial f}{\partial a_k}$$
+Leaving us with\
+$$\forall w \in ⟦0, n ⟧, \ \lambda_w\ddot{a_w} + \frac{\partial f}{\partial a_w}\sum_{{k=0} \atop{k \neq w}}^n H_k = C_w$$
+We now have the system of equations:
+```math
+\begin{cases}
+\lambda_0\ddot{a_0} + \frac{\partial f}{\partial a_0}H_1 + \frac{\partial f}{\partial a_0}H_2 + \ldots + \frac{\partial f}{\partial a_0}H_n = C_0 \\
+\lambda_1\ddot{a_1} + \frac{\partial f}{\partial a_1}H_0 + \frac{\partial f}{\partial a_1}H_1 + \ldots + \frac{\partial f}{\partial a_1}H_n = C_1 \\
+\vdots \\
+\lambda_n\ddot{a_n} + \frac{\partial f}{\partial a_n}H_0 + \frac{\partial f}{\partial a_n}H_1 + \ldots + \frac{\partial f}{\partial a_{n}}H_{n-1} = C_n \\
+\end{cases}
+```
+Which can be rewritten with matrices:
+```math
+\begin{pmatrix}
+\lambda_0 \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_1} \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_n} \\
+\frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_0} \ \ \lambda_1 \ \ \frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_n} \\
+\vdots \\
+\frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_0} \ \ \frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_1} \ \ \frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \lambda_n
+\end{pmatrix}  \begin{pmatrix}\ddot{a_0} \\ \ddot{a_1} \\ \vdots \\ \ddot{a_n} \end{pmatrix} = \begin{pmatrix}C_0 \\ C_1 \\ \vdots \\ C_n \end{pmatrix}
+```
+All in all, we end up with:
+```math
+\begin{pmatrix}\ddot{a_0} \\ \ddot{a_1} \\ \vdots \\ \ddot{a_n} \end{pmatrix} = \begin{pmatrix}
+\lambda_0 \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_1} \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \frac{\partial f}{\partial a_0}\frac{\partial f}{\partial a_n} \\
+\frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_0} \ \ \lambda_1 \ \ \frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \frac{\partial f}{\partial a_1}\frac{\partial f}{\partial a_n} \\
+\vdots \\
+\frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_0} \ \ \frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_1} \ \ \frac{\partial f}{\partial a_n}\frac{\partial f}{\partial a_2} \ \ \ldots \ \ \lambda_n
+\end{pmatrix}^{-1} \begin{pmatrix}C_0 \\ C_1 \\ \vdots \\ C_n \end{pmatrix}
+```
+This is the same form as the 2D and 3D results, so it is very easy to input into the program. However, note that you need to specify eevry possible combination of mixed partial derivatives. The program expects an order like so:\
+$$\frac{\partial^2 f}{\partial a_0^2} \ , \  \frac{\partial^2 f}{\partial a_0 \partial a_1} \ , \ \frac{\partial^2 f}{\partial a_0 \partial a_2} \ , \ldots \ , \frac{\partial^2 f}{\partial a_1 \partial a_0} \ , \ \frac{\partial^2 f}{\partial a_1^2} \ , \ \frac{\partial^2 f}{\partial a_1 \partial a_2} \ , \ldots \  , \frac{\partial^2 f}{\partial a_n^2}$$
+Yes some terms are redundant, but it helps for the program's simplicity and is much easier to understand.
