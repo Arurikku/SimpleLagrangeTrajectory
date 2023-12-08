@@ -31,7 +31,7 @@ $$\frac{d}{dt}\frac{\partial L}{\partial \dot{x}} = m (\ddot{x}(1+f'(x)^2)+2\dot
 $$\frac{\partial L}{\partial x} = mf'(x)(\dot{x}^2f''(x)-g)$$
 From the principle of least action we have:
 $$m (\ddot{x}(1+f'(x)^2)+2\dot{x}f'(x)f''(x)) = mf'(x)(\dot{x}^2f''(x)-g)$$
-$$\iff \ddot{x} = \frac{mf'(x)(\dot{x}^2f''(x)-g) - 2\dot{x}f'(x)f''(x)}{1+f'(x)^2}$$
+$$\iff \ddot{x} = \frac{f'(x)(\dot{x}^2f''(x)-g) - 2\dot{x}f'(x)f''(x)}{1+f'(x)^2}$$
 ## Translating to python
 While this seems to be an unsolvable, we can easily plot this using python.
 First, let us lay the mathematical ground work:\
